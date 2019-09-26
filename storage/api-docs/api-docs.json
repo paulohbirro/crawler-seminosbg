@@ -1,0 +1,59 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Api web crawller seminovosBH",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/buscar/{marca}/{modelo}/{ano}/{preco}": {
+            "get": {
+                "tags": [
+                    "veiculo"
+                ],
+                "summary": "Retorna todos veiculos",
+                "description": "Busca todos veiculos de acordo com os filtros passados",
+                "operationId": "findPetsByTags",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "marca",
+                        "in": "path",
+                        "description": "fiat, honda, ford ..",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "modelo",
+                        "in": "path",
+                        "description": "uno, palio, tempra",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ano",
+                        "in": "path",
+                        "description": "1981-2020",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "preco",
+                        "in": "path",
+                        "description": "2000-40000",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Opera\u00e7\u00e3o Realizada Com sucesso!"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
