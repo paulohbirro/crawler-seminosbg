@@ -14,6 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::group(['middleware' => 'web'], function () {
+    Route::get('api/documentation', '\L5Swagger\Http\Controllers\SwaggerController@api')->name('l5swagger.api');
+    Route::post('/buscar/detalhes', 'CrawllerSeminovos@show')->name('crawller.show');
+    Route::get('/buscar/{marca}/{modelo}/{ano}/{preco}', 'CrawllerSeminovos@index')->name('crawller.index');
+});
 
 
-Route::get('/buscar/{marca}/{modelo}/{ano}/{preco}', 'CrawllerSeminovos@index')->name('crawller.index');

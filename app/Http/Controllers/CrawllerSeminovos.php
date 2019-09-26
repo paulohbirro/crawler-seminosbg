@@ -15,7 +15,6 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  */
 
-
 class CrawllerSeminovos extends Controller
 {
    /**
@@ -26,6 +25,19 @@ class CrawllerSeminovos extends Controller
 
    public $crawler;
    public $dados = [];
+   public $dadosDetalhes = [];
+
+
+   public function buscarVeiculoFiltroDetalhes($url)
+   {
+
+
+      $client = new Client();
+      $crawler = $client->request('GET', $url);
+      $this->crawler = $crawler;
+
+      $this->crawler->filter('.row-print .pl-print-3 mb-1')->each(function (Crawler $cardContent, $i) { });
+   }
 
 
    public function buscarVeiculoFiltro($marca, $modelo, $ano, $preco)
@@ -124,6 +136,41 @@ class CrawllerSeminovos extends Controller
 
          $this->buscarVeiculoFiltro($marca, $modelo, $ano, $preco);
          return response()->json($this->dados, 200);
+      } catch (\Throwable $th) {
+         return response()->json("Erro, não encontrou nenhum veiculo", 404);
+      }
+   }
+
+
+   /**
+    * @SWG\Post(
+    *     path="/buscar/detalhes",
+    *     summary="Retorna detalhes do veiculo de acordo com a url passada",
+    *     tags={"veiculo detalhes"},
+    *     description="Retorna detalhes do veiculo",
+    *     operationId="findPetsByTags",
+    *     produces={"application/xml", "application/json"},
+    *     @SWG\Parameter(
+    *         name="url",
+    *         in="formData",
+    *         description="url resgatada do outro endpoint linkDetalhes",
+    *         required=true,
+    *         type="string",
+    *     ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="Operação Realizada Com sucesso!",
+    *        
+    *     ),
+    * )
+    */
+
+   public function show(Request $request)
+   {
+      try {
+
+         $this->buscarVeiculoFiltroDetalhes($request->input("url"));
+         return response()->json($this->dadosDetalhes, 200);
       } catch (\Throwable $th) {
          return response()->json("Erro, não encontrou nenhum veiculo", 404);
       }
