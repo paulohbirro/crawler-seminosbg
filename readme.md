@@ -13,6 +13,6 @@
  2 [ abra seu navegador e acesse a url : http://localhost:8000/api/documentation] 
  
  ## Utilizei o swagger para fazer documentação da api.
- # Ficou faltando o metodo de detalhes do veículo, pois meu tempo está curto devido a entregas de sprint finais ( acredito que é o suficiente para avaliarem, desde já obrigado  )
+
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
